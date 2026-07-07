@@ -214,13 +214,13 @@ const products = [
   { name: "Ocean Blue 2-piece Tarkashi & Mirror work (unstitched)", price: "PKR 8,000", discount: 15, desc: "Hand-embroidered | Bamber chiffon", images: ["images/photo4.png", "images/photo4-2.png", "images/photo4-3.png"] },
   { name: "Ivory Grace 2-piece Tarkashi & Mirror work (unstitched)", price: "PKR 6,500", desc: "Handmade | Bamber chiffon", images: ["images/photo3.jpeg", "images/photo5.png", "images/photo3-3.jpeg"], outOfStock: true },
   { name: "Sky Blue 2-piece Tarkashi & Mirror work (unstitched)", price: "PKR 6,500", desc: "Hand-made | Festive georgette", images: ["images/photo2.png", "images/photo2-2.png", "images/photo2-3.png"] },
-  { name: "Classic White 2-piece Tarkashi & Mirror work (unstitched)", price: "PKR 7,000", desc: "Hand-embroidered | Bamber chiffon", img: ["images/photo7.png"] },
-  { name: "Black & Crimson 2-piece hand-embroidered (unstitched)", price: "PKR 7,500", desc: "Hand-embroidered | Festive georgette", img: ["images/photo8.png"] },
-  { name: "Bridal Maroon Lehenga", price: "PKR 18,000", desc: "Heavily embellished bridal lehenga with dupatta.", img: ["images/photo9.png"] },
-  { name: "Pastel Lawn Suit", price: "PKR 3,500", desc: "Three-piece lawn suit in soft pastel tones.", img: ["images/photo10.png"] },
-  { name: "Black Velvet Kurta", price: "PKR 4,200", desc: "Winter velvet kurta with gold thread detailing.", img: ["images/photo11.png"] },
-  { name: "Rose Embroidered Shalwar Kameez", price: "PKR 5,500", desc: "Rose-pink three-piece with mirror work.", img: ["images/photo12.png"] },
-  { name: "Classic White Kurta", price: "PKR 2,200", desc: "Timeless white cotton kurta, minimal embroidery.", img: ["images/photo13.png"] }
+  { name: "Classic White 2-piece Tarkashi & Mirror work (unstitched)", price: "PKR 7,000", desc: "Hand-embroidered | Bamber chiffon", img: "images/photo7.png" },
+  { name: "Black & Crimson 2-piece hand-embroidered (unstitched)", price: "PKR 7,500", desc: "Hand-embroidered | Festive georgette", img: "images/photo8.png" },
+  { name: "Bridal Maroon Lehenga", price: "PKR 18,000", desc: "Heavily embellished bridal lehenga with dupatta.", img: "images/photo9.png" },
+  { name: "Pastel Lawn Suit", price: "PKR 3,500", desc: "Three-piece lawn suit in soft pastel tones.", img: "images/photo10.png" },
+  { name: "Black Velvet Kurta", price: "PKR 4,200", desc: "Winter velvet kurta with gold thread detailing.", img: "images/photo11.png" },
+  { name: "Rose Embroidered Shalwar Kameez", price: "PKR 5,500", desc: "Rose-pink three-piece with mirror work.", img: "images/photo12.png" },
+  { name: "Classic White Kurta", price: "PKR 2,200", desc: "Timeless white cotton kurta, minimal embroidery.", img: "images/photo13.png" }
 ];
 
 const grid = document.getElementById('shopGrid');
@@ -346,44 +346,23 @@ document.addEventListener('click', e => {
 document.getElementById('closeModal').addEventListener('click', () => overlay.classList.remove('active'));
 
 document.getElementById('orderForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const form = e.target;
-
-    const product = modalName.textContent;
-    const name = form.querySelector('input[type="text"]').value;
-    const phone = form.querySelector('input[type="tel"]').value;
-    const address = form.querySelector('textarea').value;
-
-    const formData = new FormData();
-    formData.append("entry.2044316825", product);
-    formData.append("entry.1940213735", name);
-    formData.append("entry.473078617", phone);
-    formData.append("entry.890501403", address);
-    formData.append("entry.1197115355", selectedMethod);
-
-    await fetch(
-        "https://docs.google.com/forms/d/e/1FAIpQLSePjEXjFb8rKnNX5xS1H7ACbzM8Kx6mPx08ncnUXw95kaEYEQ/formResponse",
-        {
-            method: "POST",
-            mode: "no-cors",
-            body: formData
-        }
-    );
-
-    alert("Thank you! Your order has been placed successfully.");
-
-    overlay.classList.remove("active");
-    form.reset();
-});
-  if (selectedMethod === 'Card') {
-    alert('Redirecting to card payment...\n(Replace this with your real JazzCash / Easypaisa / PayPal link in the JS)');
-    // window.location.href = "https://your-payment-link.com";
-  } else {
-    alert('Order placed! We will call you to confirm your Cash on Delivery order.');
-  }
+  e.preventDefault();
+  const form=e.target;
+  const product=modalName.textContent;
+  const name=form.querySelector('input[type="text"]').value;
+  const phone=form.querySelector('input[type="tel"]').value;
+  const address=form.querySelector('textarea').value;
+  const fd=new FormData();
+  fd.append('entry.2044316825',product);
+  fd.append('entry.1940213735',name);
+  fd.append('entry.473078617',phone);
+  fd.append('entry.890501403',address);
+  fd.append('entry.1197115355',selectedMethod==='Card'?'Online Payment':'Cash on Delivery');
+  await fetch('https://docs.google.com/forms/d/e/1FAIpQLSePjEXjFb8rKnNX5xS1H7ACbzM8Kx6mPx08ncnUXw95kaEYEQ/formResponse',{method:'POST',mode:'no-cors',body:fd});
+  if(selectedMethod==='Card'){alert('Order saved. Please complete your online payment as instructed.');}
+  else{alert('Thank you! Your order has been placed.');}
   overlay.classList.remove('active');
-  e.target.reset();
+  form.reset();
 });
 </script>
 </body>
