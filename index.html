@@ -345,8 +345,37 @@ document.addEventListener('click', e => {
 
 document.getElementById('closeModal').addEventListener('click', () => overlay.classList.remove('active'));
 
-document.getElementById('orderForm').addEventListener('submit', e => {
-  e.preventDefault();
+document.getElementById('orderForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+
+    const product = modalName.textContent;
+    const name = form.querySelector('input[type="text"]').value;
+    const phone = form.querySelector('input[type="tel"]').value;
+    const address = form.querySelector('textarea').value;
+
+    const formData = new FormData();
+    formData.append("entry.2044316825", product);
+    formData.append("entry.1940213735", name);
+    formData.append("entry.473078617", phone);
+    formData.append("entry.890501403", address);
+    formData.append("entry.1197115355", selectedMethod);
+
+    await fetch(
+        "https://docs.google.com/forms/d/e/1FAIpQLSePjEXjFb8rKnNX5xS1H7ACbzM8Kx6mPx08ncnUXw95kaEYEQ/formResponse",
+        {
+            method: "POST",
+            mode: "no-cors",
+            body: formData
+        }
+    );
+
+    alert("Thank you! Your order has been placed successfully.");
+
+    overlay.classList.remove("active");
+    form.reset();
+});
   if (selectedMethod === 'Card') {
     alert('Redirecting to card payment...\n(Replace this with your real JazzCash / Easypaisa / PayPal link in the JS)');
     // window.location.href = "https://your-payment-link.com";
