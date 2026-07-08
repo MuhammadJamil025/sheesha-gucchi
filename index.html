@@ -86,6 +86,7 @@
   .pay-options{display:flex;gap:10px;margin-top:16px;}
   .pay-options button{flex:1;padding:12px;border:1px solid var(--ink);background:#fff;font-size:0.78rem;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;}
   .pay-options button.selected{background:var(--ink);color:#fff;}
+  .cod-notice{margin-top:18px;padding:12px 14px;background:#f4ede2;border:1px solid var(--line);font-size:0.85rem;color:#5a4d44;letter-spacing:0.02em;}
   .submit-order{margin-top:24px;width:100%;padding:15px;border:none;background:var(--maroon);color:#fff;font-size:0.85rem;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;}
   .submit-order:hover{background:var(--ink);}
   .close-btn{float:right;background:none;border:none;font-size:1.2rem;cursor:pointer;color:var(--ink);}
@@ -192,31 +193,6 @@
   </div>
 </div>
 
-<!-- Order modal -->
-<div class="overlay" id="orderOverlay">
-  <div class="modal">
-    <button class="close-btn" id="closeModal">✕</button>
-    <h3 id="modalProductName">Product</h3>
-    <div class="modal-price" id="modalProductPrice">PKR 0</div>
-    <form id="orderForm">
-      <label>Full Name</label>
-      <input type="text" required placeholder="Your name">
-      <label>Phone Number</label>
-      <input type="tel" required placeholder="03XX-XXXXXXX">
-      <label>Delivery Address</label>
-      <textarea required rows="2" placeholder="House, street, city"></textarea>
-      <label>Size</label>
-      <input type="text" placeholder="S / M / L / XL">
-      <label>Payment Method</label>
-      <div class="pay-options">
-        <button type="button" class="pay-btn selected" data-method="COD">Cash on Delivery</button>
-        <button type="button" class="pay-btn" data-method="Card">Card</button>
-      </div>
-      <button type="submit" class="submit-order">Place Order</button>
-    </form>
-  </div>
-</div>
-
 <!-- Checkout modal (cart orders) -->
 <div class="overlay" id="checkoutOverlay">
   <div class="modal">
@@ -228,13 +204,11 @@
       <input type="text" required placeholder="Your name">
       <label>Phone Number</label>
       <input type="tel" required placeholder="03XX-XXXXXXX">
+      <label>Email <span style="text-transform:none;font-weight:400;color:#a8998a;">(optional)</span></label>
+      <input type="email" placeholder="you@example.com">
       <label>Delivery Address</label>
       <textarea required rows="2" placeholder="House, street, city"></textarea>
-      <label>Payment Method</label>
-      <div class="pay-options">
-        <button type="button" class="pay-btn2 selected" data-method="COD">Cash on Delivery</button>
-        <button type="button" class="pay-btn2" data-method="Card">Card</button>
-      </div>
+      <div class="cod-notice">Payment Method: Cash on Delivery</div>
       <button type="submit" class="submit-order">Place Order</button>
     </form>
   </div>
@@ -422,15 +396,6 @@ document.addEventListener('click', e => {
     return;
   }
 
-  // Order Now
-  if (e.target.classList.contains('order-btn') && e.target.dataset.i !== undefined) {
-    const p = products[e.target.dataset.i];
-    document.getElementById('modalProductName').textContent = p.name;
-    document.getElementById('modalProductPrice').innerHTML = priceHtml(p);
-    document.getElementById('orderOverlay').classList.add('active');
-    return;
-  }
-
   // Add to cart bag icon
   if (e.target.classList.contains('cart-add-btn') || e.target.closest('.cart-add-btn')) {
     const btn = e.target.closest('.cart-add-btn');
@@ -443,14 +408,6 @@ document.addEventListener('click', e => {
     return;
   }
 
-  // Pay method (order modal)
-  if (e.target.classList.contains('pay-btn')) {
-    document.querySelectorAll('.pay-btn').forEach(b => b.classList.remove('selected'));
-    e.target.classList.add('selected');
-    selectedMethod = e.target.dataset.method;
-    return;
-  }
-
   // Pay method (checkout modal)
   if (e.target.classList.contains('pay-btn2')) {
     document.querySelectorAll('.pay-btn2').forEach(b => b.classList.remove('selected'));
@@ -460,46 +417,24 @@ document.addEventListener('click', e => {
   }
 });
 
-document.getElementById('closeModal').addEventListener('click', () => {
-  document.getElementById('orderOverlay').classList.remove('active');
-});
-
-// Order Now form submit
-document.getElementById('orderForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const form = e.target;
-  const product = document.getElementById('modalProductName').textContent;
-  const name = form.querySelector('input[type="text"]').value;
-  const phone = form.querySelector('input[type="tel"]').value;
-  const address = form.querySelector('textarea').value;
-  const fd = new FormData();
-  fd.append('entry.2044316825', product);
-  fd.append('entry.1940213735', name);
-  fd.append('entry.473078617', phone);
-  fd.append('entry.890501403', address);
-  fd.append('entry.1197115355', selectedMethod==='Card' ? 'Online Payment' : 'Cash on Delivery');
-  await fetch('https://docs.google.com/forms/d/e/1FAIpQLSePjEXjFb8rKnNX5xS1H7ACbzM8Kx6mPx08ncnUXw95kaEYEQ/formResponse', {method:'POST',mode:'no-cors',body:fd});
-  alert(selectedMethod==='Card' ? 'Order saved. Please complete your online payment.' : 'Thank you! Your order has been placed.');
-  document.getElementById('orderOverlay').classList.remove('active');
-  form.reset();
-});
-
 // Checkout form (cart) submit
 document.getElementById('checkoutForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   const form = e.target;
   const name = form.querySelector('input[type="text"]').value;
   const phone = form.querySelector('input[type="tel"]').value;
+  const email = form.querySelector('input[type="email"]').value;
   const address = form.querySelector('textarea').value;
   const itemsSummary = cart.map(c => `${c.name.trim()} x${c.qty}`).join(' | ');
   const total = formatPrice(cart.reduce((s,c) => s+c.unitPrice*c.qty,0));
   const fd = new FormData();
-  fd.append('entry.2044316825', itemsSummary);
-  fd.append('entry.1940213735', name);
-  fd.append('entry.473078617', phone);
-  fd.append('entry.890501403', address);
-  fd.append('entry.1197115355', (selectedMethod2==='Card'?'Online Payment':'Cash on Delivery') + ' | Total: ' + total);
-  await fetch('https://docs.google.com/forms/d/e/1FAIpQLSePjEXjFb8rKnNX5xS1H7ACbzM8Kx6mPx08ncnUXw95kaEYEQ/formResponse', {method:'POST',mode:'no-cors',body:fd});
+  fd.append('entry.1195881377', itemsSummary);
+  fd.append('entry.1744213306', name);
+  fd.append('entry.1904664450', phone);
+  fd.append('entry.1079290946', address);
+  fd.append('entry.1394769822', total);
+  fd.append('entry.532650267', email);
+  await fetch('https://docs.google.com/forms/d/e/1FAIpQLSdUrwbEErhC85cbVI8g2WDmOMwwcJ_pux4dmn3jvHY48ujuMg/formResponse', {method:'POST',mode:'no-cors',body:fd});
   alert('Thank you! Your order has been placed. We will contact you soon.');
   document.getElementById('checkoutOverlay').classList.remove('active');
   cart = [];
