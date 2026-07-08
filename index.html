@@ -7,25 +7,23 @@
 <meta name="description" content="Sheesha Gucchi — handcrafted kurtas and shalwar kameez for the modern woman. Shop now, cash on delivery or card.">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@300;400;500;600&display=swap');
-  :root{
-    --maroon:#8C2F39;
-    --gold:#B58B46;  
-    --cream:#FAF6F0;
-    --ink:#2B221E;
-    --line:#E4DCD0;
-  }
+  :root{--maroon:#8C2F39;--gold:#B58B46;--cream:#FAF6F0;--ink:#2B221E;--line:#E4DCD0;}
   *{box-sizing:border-box;margin:0;padding:0;}
   body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);font-weight:300;}
   h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:600;letter-spacing:0.01em;}
   a{text-decoration:none;color:inherit;}
-
   .promo-bar{background:var(--maroon);color:var(--cream);text-align:center;font-size:0.78rem;letter-spacing:0.08em;padding:9px 10px;text-transform:uppercase;}
-
   header{display:flex;justify-content:space-between;align-items:center;padding:22px 6%;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50;background:var(--cream);}
   .logo{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:700;letter-spacing:0.04em;color:var(--maroon);}
   nav{display:flex;align-items:center;gap:34px;}
   nav a{font-size:0.85rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink);}
   nav a:hover{color:var(--maroon);}
+
+  /* CART ICON */
+  .cart-btn{background:none;border:none;cursor:pointer;position:relative;display:flex;align-items:center;gap:6px;font-size:0.85rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink);font-family:'Jost',sans-serif;}
+  .cart-btn:hover{color:var(--maroon);}
+  .cart-count{background:var(--maroon);color:#fff;border-radius:50%;width:18px;height:18px;font-size:0.65rem;display:none;align-items:center;justify-content:center;font-weight:600;}
+  .cart-count.visible{display:flex;}
 
   .hero{min-height:78vh;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(rgba(43,34,30,0.32),rgba(43,34,30,0.32)),linear-gradient(135deg,#d9c7b0,#b58b46 45%,#8c2f39 100%);color:#fff;padding:40px 6%;}
   .hero-inner{max-width:640px;}
@@ -34,80 +32,36 @@
   .hero p{margin-top:18px;font-size:1.05rem;font-weight:300;opacity:0.95;}
   .hero .cta{margin-top:34px;display:inline-block;border:1px solid #fff;padding:14px 40px;font-size:0.85rem;letter-spacing:0.12em;text-transform:uppercase;transition:background 0.2s,color 0.2s;}
   .hero .cta:hover{background:#fff;color:var(--maroon);}
-
   section{padding:80px 6%;}
   .section-head{text-align:center;margin-bottom:50px;}
   .section-head .eyebrow{color:var(--gold);margin-bottom:10px;}
   .section-head h2{font-size:clamp(2rem,4vw,2.8rem);}
   .section-head p{margin-top:12px;color:#6b5e54;font-size:0.95rem;max-width:480px;margin-left:auto;margin-right:auto;}
-
-  /* Fixed 3-column grid, never more */
-  .shop-grid{
-    display:grid;
-    grid-template-columns:repeat(3,minmax(0,320px));
-    gap:28px;
-    justify-content:center;
-    max-width:1060px;
-    margin:0 auto;
-  }
-
+  .shop-grid{display:grid;grid-template-columns:repeat(3,minmax(0,320px));gap:28px;justify-content:center;max-width:1060px;margin:0 auto;}
   .product{text-align:left;display:flex;flex-direction:column;}
-
-  /* Photo box — always same size, always visible */
-  .product-imgbox{
-    width:100%;
-    aspect-ratio:4/5;
-    background:#ffffff;
-    border:none;
-    overflow:hidden;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#fff;
-    font-family:'Cormorant Garamond',serif;
-    font-size:1rem;
-    text-align:center;
-    padding:0px;
-  }
-  .product-imgbox img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-  }
+  .product-imgbox{width:100%;aspect-ratio:4/5;background:#ffffff;border:none;overflow:hidden;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Cormorant Garamond',serif;font-size:1rem;text-align:center;padding:0px;}
+  .product-imgbox img{width:100%;height:100%;object-fit:cover;display:block;}
   .photo-slider{position:relative;width:100%;height:100%;}
   .photo-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 0.25s ease;}
   .photo-slide.active{opacity:1;}
-  .slider-btn{
-    position:absolute;
-    top:50%;
-    transform:translateY(-50%);
-    width:34px;
-    height:34px;
-    border:1px solid rgba(255,255,255,0.78);
-    background:rgba(43,34,30,0.45);
-    color:#fff;
-    cursor:pointer;
-    font-size:1.25rem;
-    line-height:1;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    z-index:2;
-  }
+  .slider-btn{position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;border:1px solid rgba(255,255,255,0.78);background:rgba(43,34,30,0.45);color:#fff;cursor:pointer;font-size:1.25rem;line-height:1;display:flex;align-items:center;justify-content:center;z-index:2;}
   .slider-btn:hover{background:rgba(140,47,57,0.86);}
   .slider-btn.prev{left:10px;}
   .slider-btn.next{right:10px;}
   .slider-dots{position:absolute;left:0;right:0;bottom:10px;display:flex;justify-content:center;gap:7px;z-index:2;}
   .slider-dot{width:8px;height:8px;border-radius:50%;border:1px solid #fff;background:rgba(255,255,255,0.35);cursor:pointer;padding:0;}
   .slider-dot.active{background:#fff;}
-
   .product-info{padding:18px 0 0;flex:1;display:flex;flex-direction:column;}
   .product-info h3{font-size:1.2rem;font-weight:600;margin-bottom:6px;}
   .product-info p{font-size:0.85rem;color:#6b5e54;line-height:1.55;flex:1;}
   .price{font-family:'Jost',sans-serif;font-weight:500;color:var(--maroon);font-size:0.95rem;margin-top:10px;}
-  .order-btn{margin-top:14px;width:100%;background:var(--ink);color:#fff;padding:13px;border:none;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:background 0.2s;}
+
+  /* PRODUCT BUTTONS */
+  .product-btns{display:flex;gap:8px;margin-top:14px;}
+  .order-btn{flex:1;background:var(--ink);color:#fff;padding:13px;border:none;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:background 0.2s;}
   .order-btn:hover{background:var(--maroon);}
+  .cart-add-btn{background:transparent;border:1px solid var(--ink);color:var(--ink);padding:13px 14px;font-size:1rem;cursor:pointer;transition:background 0.2s,color 0.2s;display:flex;align-items:center;justify-content:center;}
+  .cart-add-btn:hover{background:var(--ink);color:#fff;}
 
   .about{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);text-align:center;}
   .about .eyebrow{color:var(--gold);margin-bottom:14px;}
@@ -116,9 +70,9 @@
   .socials{display:flex;gap:16px;justify-content:center;margin-top:34px;flex-wrap:wrap;}
   .socials a{border:1px solid var(--ink);padding:10px 26px;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;}
   .socials a:hover{background:var(--ink);color:#fff;}
-
   footer{text-align:center;padding:36px 6%;font-size:0.78rem;color:#8a7d72;letter-spacing:0.04em;}
 
+  /* ORDER MODAL */
   .overlay{position:fixed;inset:0;background:rgba(43,34,30,0.55);display:none;align-items:center;justify-content:center;z-index:100;padding:20px;}
   .overlay.active{display:flex;}
   .modal{background:var(--cream);border:1px solid var(--line);max-width:420px;width:100%;padding:36px;max-height:90vh;overflow-y:auto;}
@@ -134,8 +88,47 @@
   .submit-order:hover{background:var(--ink);}
   .close-btn{float:right;background:none;border:none;font-size:1.2rem;cursor:pointer;color:var(--ink);}
 
+  /* CART PANEL */
+  .cart-panel{position:fixed;top:0;right:-420px;width:100%;max-width:420px;height:100vh;background:var(--cream);border-left:1px solid var(--line);z-index:200;display:flex;flex-direction:column;transition:right 0.3s ease;box-shadow:-4px 0 20px rgba(0,0,0,0.08);}
+  .cart-panel.open{right:0;}
+  .cart-header{display:flex;justify-content:space-between;align-items:center;padding:24px 28px;border-bottom:1px solid var(--line);}
+  .cart-header h3{font-size:1.4rem;}
+  .cart-close{background:none;border:none;font-size:1.3rem;cursor:pointer;}
+  .cart-items{flex:1;overflow-y:auto;padding:20px 28px;}
+  .cart-empty{text-align:center;padding:60px 20px;color:#8a7d72;font-size:0.95rem;}
+  .cart-item{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line);}
+  .cart-item-img{width:70px;height:90px;object-fit:cover;flex-shrink:0;background:#f0ebe4;}
+  .cart-item-info{flex:1;}
+  .cart-item-info h4{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;margin-bottom:4px;line-height:1.3;}
+  .cart-item-info .item-price{color:var(--maroon);font-size:0.9rem;font-weight:500;}
+  .cart-item-info .item-size{font-size:0.8rem;color:#8a7d72;margin-top:4px;}
+  .cart-item-remove{background:none;border:none;color:#8a7d72;cursor:pointer;font-size:1.1rem;align-self:flex-start;padding:2px;}
+  .cart-item-remove:hover{color:var(--maroon);}
+  .cart-qty{display:flex;align-items:center;gap:10px;margin-top:8px;}
+  .cart-qty button{background:none;border:1px solid var(--line);width:26px;height:26px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;}
+  .cart-qty span{font-size:0.9rem;min-width:20px;text-align:center;}
+  .cart-footer{padding:20px 28px;border-top:1px solid var(--line);}
+  .cart-total{display:flex;justify-content:space-between;margin-bottom:18px;font-size:1rem;}
+  .cart-total span:last-child{font-weight:600;color:var(--maroon);}
+  .checkout-btn{width:100%;padding:15px;border:none;background:var(--maroon);color:#fff;font-size:0.85rem;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;}
+  .checkout-btn:hover{background:var(--ink);}
+  .cart-backdrop{position:fixed;inset:0;background:rgba(43,34,30,0.4);z-index:199;display:none;}
+  .cart-backdrop.open{display:block;}
+
+  /* SIZE MODAL */
+  .size-overlay{position:fixed;inset:0;background:rgba(43,34,30,0.55);display:none;align-items:center;justify-content:center;z-index:150;padding:20px;}
+  .size-overlay.active{display:flex;}
+  .size-modal{background:var(--cream);border:1px solid var(--line);max-width:340px;width:100%;padding:30px;}
+  .size-modal h3{font-size:1.3rem;margin-bottom:6px;}
+  .size-modal .sm-product{font-size:0.85rem;color:#6b5e54;margin-bottom:20px;}
+  .size-options{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px;}
+  .size-opt{border:1px solid var(--line);padding:9px 18px;background:#fff;cursor:pointer;font-size:0.85rem;font-family:'Jost',sans-serif;}
+  .size-opt:hover,.size-opt.selected{background:var(--ink);color:#fff;border-color:var(--ink);}
+  .size-confirm{width:100%;padding:13px;border:none;background:var(--maroon);color:#fff;font-size:0.85rem;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;}
+  .size-confirm:hover{background:var(--ink);}
+
   @media(max-width:900px){.shop-grid{grid-template-columns:repeat(2,minmax(0,320px));}}
-  @media(max-width:560px){.shop-grid{grid-template-columns:minmax(0,340px);} nav{display:none;}}
+  @media(max-width:560px){.shop-grid{grid-template-columns:minmax(0,340px);}nav a:not(.cart-nav){display:none;}}
 </style>
 </head>
 <body>
@@ -148,6 +141,10 @@
     <a href="#shop">Shop</a>
     <a href="#about">Our Story</a>
     <a href="#contact">Contact</a>
+    <button class="cart-btn" id="cartBtn">
+      🛍 Cart
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
   </nav>
 </header>
 
@@ -182,6 +179,47 @@
 
 <footer>© 2026 Sheesha Gucchi. Handcrafted in Pakistan.</footer>
 
+<!-- Cart backdrop -->
+<div class="cart-backdrop" id="cartBackdrop"></div>
+
+<!-- Cart panel -->
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-header">
+    <h3>Your Cart</h3>
+    <button class="cart-close" id="cartClose">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty">Your cart is empty</div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none;">
+    <div class="cart-total">
+      <span>Total</span>
+      <span id="cartTotal">PKR 0</span>
+    </div>
+    <button class="checkout-btn" id="checkoutBtn">Place Order</button>
+  </div>
+</div>
+
+<!-- Size picker modal -->
+<div class="size-overlay" id="sizeOverlay">
+  <div class="size-modal">
+    <button class="close-btn" id="sizeClose">✕</button>
+    <h3>Select Size</h3>
+    <div class="sm-product" id="sizeProductName"></div>
+    <div class="size-options">
+      <button class="size-opt" data-size="XS">XS</button>
+      <button class="size-opt" data-size="S">S</button>
+      <button class="size-opt" data-size="M">M</button>
+      <button class="size-opt" data-size="L">L</button>
+      <button class="size-opt" data-size="XL">XL</button>
+      <button class="size-opt" data-size="XXL">XXL</button>
+      <button class="size-opt" data-size="Unstitched">Unstitched</button>
+    </div>
+    <button class="size-confirm" id="sizeConfirm">Add to Cart</button>
+  </div>
+</div>
+
+<!-- Order modal -->
 <div class="overlay" id="orderOverlay">
   <div class="modal">
     <button class="close-btn" id="closeModal">✕</button>
@@ -194,6 +232,8 @@
       <input type="tel" required placeholder="03XX-XXXXXXX">
       <label>Delivery Address</label>
       <textarea required rows="2" placeholder="House, street, city"></textarea>
+      <label>Size</label>
+      <input type="text" placeholder="S / M / L / XL">
       <label>Payment Method</label>
       <div class="pay-options">
         <button type="button" class="pay-btn selected" data-method="COD">Cash on Delivery</button>
@@ -204,71 +244,88 @@
   </div>
 </div>
 
+<!-- Checkout modal (cart orders) -->
+<div class="overlay" id="checkoutOverlay">
+  <div class="modal">
+    <button class="close-btn" id="closeCheckout">✕</button>
+    <h3>Checkout</h3>
+    <div class="modal-price" id="checkoutTotal" style="margin-bottom:22px;"></div>
+    <form id="checkoutForm">
+      <label>Full Name</label>
+      <input type="text" required placeholder="Your name">
+      <label>Phone Number</label>
+      <input type="tel" required placeholder="03XX-XXXXXXX">
+      <label>Delivery Address</label>
+      <textarea required rows="2" placeholder="House, street, city"></textarea>
+      <label>Payment Method</label>
+      <div class="pay-options">
+        <button type="button" class="pay-btn2 selected" data-method="COD">Cash on Delivery</button>
+        <button type="button" class="pay-btn2" data-method="Card">Card</button>
+      </div>
+      <button type="submit" class="submit-order">Place Order</button>
+    </form>
+  </div>
+</div>
+
 <script>
-// ============================================================
-// EDIT YOUR 10 PRODUCTS HERE
-// img: use one photo, or images: ["images/front.jpg", "images/back.jpg"] for slides
-// ============================================================
 const products = [
   { name: "Sage Green & Lavender Embroidered Tarkashi & Mirror work (unstitched) ", price: "PKR 7,000", desc: "Hand-embroidered | Bamber chiffon.", images: ["images/photo6.png", "images/shirt1.jpeg", "images/duppata1.jpeg"] },
   { name: "Ocean Blue 2-piece Tarkashi & Mirror work (unstitched)", price: "PKR 8,000", discount: 15, desc: "Hand-embroidered | Bamber chiffon", images: ["images/photo4.png", "images/photo4-2.png", "images/photo4-3.png"] },
   { name: "Ivory Grace 2-piece Tarkashi & Mirror work (unstitched)", price: "PKR 6,500", desc: "Handmade | Bamber chiffon", images: ["images/photo3.jpeg", "images/photo5.png", "images/photo3-3.jpeg"], outOfStock: true },
   { name: "Sky Blue 2-piece Tarkashi & Mirror work (unstitched)", price: "PKR 6,500", desc: "Hand-made | Festive georgette", images: ["images/photo2.png", "images/photo2-2.png", "images/photo2-3.png"] },
-  { name: "Classic White 2-piece Tarkashi & Mirror work (unstitched)", price: "PKR 7,000", desc: "Hand-embroidered | Bamber chiffon", img: "images/photo7.png" },
-  { name: "Black & Crimson 2-piece hand-embroidered (unstitched)", price: "PKR 7,500", desc: "Hand-embroidered | Festive georgette", img: "images/photo8.png" },
-  { name: "Bridal Maroon Lehenga", price: "PKR 18,000", desc: "Heavily embellished bridal lehenga with dupatta.", img: "images/photo9.png" },
-  { name: "Pastel Lawn Suit", price: "PKR 3,500", desc: "Three-piece lawn suit in soft pastel tones.", img: "images/photo10.png" },
-  { name: "Black Velvet Kurta", price: "PKR 4,200", desc: "Winter velvet kurta with gold thread detailing.", img: "images/photo11.png" },
-  { name: "Rose Embroidered Shalwar Kameez", price: "PKR 5,500", desc: "Rose-pink three-piece with mirror work.", img: "images/photo12.png" },
-  { name: "Classic White Kurta", price: "PKR 2,200", desc: "Timeless white cotton kurta, minimal embroidery.", img: "images/photo13.png" }
+  { name: "Classic White 2-piece Tarkashi & Mirror work (unstitched)", price: "PKR 7,000", desc: "Hand-embroidered | Bamber chiffon", images: ["images/photo7.png"] },
+  { name: "Black & Crimson 2-piece hand-embroidered (unstitched)", price: "PKR 7,500", desc: "Hand-embroidered | Festive georgette", images: ["images/photo8.png"] },
+  { name: "Bridal Maroon Lehenga", price: "PKR 18,000", desc: "Heavily embellished bridal lehenga with dupatta.", images: ["images/photo9.png"] },
+  { name: "Pastel Lawn Suit", price: "PKR 3,500", desc: "Three-piece lawn suit in soft pastel tones.", images: ["images/photo10.png"] },
+  { name: "Black Velvet Kurta", price: "PKR 4,200", desc: "Winter velvet kurta with gold thread detailing.", images: ["images/photo11.png"] },
+  { name: "Rose Embroidered Shalwar Kameez", price: "PKR 5,500", desc: "Rose-pink three-piece with mirror work.", images: ["images/photo12.png"] },
+  { name: "Classic White Kurta", price: "PKR 2,200", desc: "Timeless white cotton kurta, minimal embroidery.", images: ["images/photo13.png"] }
 ];
 
-const grid = document.getElementById('shopGrid');
+// ── Cart state ──────────────────────────────────────────────
+let cart = [];
 
-function priceNumber(price) {
-  return Number(String(price).replace(/[^\d]/g, ''));
+function priceNumber(price) { return Number(String(price).replace(/[^\d]/g,'')); }
+function formatPrice(amount) { return `PKR ${Math.round(amount).toLocaleString('en-US')}`; }
+function salePrice(p) {
+  if (!p.discount) return priceNumber(p.price);
+  return Math.round(priceNumber(p.price) * (100 - Number(p.discount)) / 100);
 }
-
-function formatPrice(amount) {
-  return `PKR ${Math.round(amount).toLocaleString('en-US')}`;
-}
-
 function priceHtml(p) {
   if (!p.discount) return `<div class="price">${p.price}</div>`;
-
-  const sale = formatPrice(priceNumber(p.price) * (100 - Number(p.discount)) / 100);
-
-  return `
-    <div class="price">
-      <span style="text-decoration:line-through;color:#8a7d72;margin-right:8px;">${p.price}</span>
-      <span style="font-weight:600;color:#8C2F39;">${sale}</span>
-      <span style="background:#8C2F39;color:white;font-size:0.7rem;padding:4px 7px;margin-left:8px;">${p.discount}% OFF</span>
-    </div>`;
+  return `<div class="price">
+    <span style="text-decoration:line-through;color:#8a7d72;margin-right:8px;">${p.price}</span>
+    <span style="font-weight:600;color:#8C2F39;">${formatPrice(salePrice(p))}</span>
+    <span style="background:#8C2F39;color:white;font-size:0.7rem;padding:4px 7px;margin-left:8px;">${p.discount}% OFF</span>
+  </div>`;
 }
+
+// ── Build product grid ──────────────────────────────────────
+const grid = document.getElementById('shopGrid');
 products.forEach((p, i) => {
   const card = document.createElement('div');
   card.className = 'product';
-
-  // Build image area — always shows placeholder gradient,
-  // replaced by real photo if img path is set and loads successfully
   const photos = p.images || (p.img ? [p.img] : []);
   let imgHtml;
   if (photos.length > 1) {
-    imgHtml = `
-      <div class="photo-slider" data-product="${i}">
-        ${photos.map((photo, photoIndex) => `<img class="photo-slide ${photoIndex === 0 ? 'active' : ''}" src="${photo}" alt="${p.name} photo ${photoIndex + 1}" onerror="handleSlideError(this)">`).join('')}
-        <button class="slider-btn prev" type="button" aria-label="Previous photo" data-direction="-1">&#8249;</button>
-        <button class="slider-btn next" type="button" aria-label="Next photo" data-direction="1">&#8250;</button>
-        <div class="slider-dots">
-          ${photos.map((photo, photoIndex) => `<button class="slider-dot ${photoIndex === 0 ? 'active' : ''}" type="button" aria-label="Show photo ${photoIndex + 1}" data-slide="${photoIndex}"></button>`).join('')}
-        </div>
-      </div>`;
+    imgHtml = `<div class="photo-slider" data-product="${i}">
+      ${photos.map((ph, pi) => `<img class="photo-slide ${pi===0?'active':''}" src="${ph}" alt="${p.name} photo ${pi+1}" onerror="handleSlideError(this)">`).join('')}
+      <button class="slider-btn prev" type="button" data-direction="-1">&#8249;</button>
+      <button class="slider-btn next" type="button" data-direction="1">&#8250;</button>
+      <div class="slider-dots">${photos.map((_,pi)=>`<button class="slider-dot ${pi===0?'active':''}" type="button" data-slide="${pi}"></button>`).join('')}</div>
+    </div>`;
   } else if (photos.length === 1) {
-    imgHtml = `<img src="${photos[0]}" alt="${p.name}"
-      onerror="this.parentElement.innerHTML='${p.name.replace(/'/g,"\\'")}'">`; 
+    imgHtml = `<img src="${photos[0]}" alt="${p.name}" onerror="this.parentElement.innerHTML='${p.name.replace(/'/g,"\\'")}'">`; 
   } else {
     imgHtml = p.name;
   }
+
+  const btns = p.outOfStock
+    ? `<button class="order-btn" style="background:#999;cursor:not-allowed;" disabled>Out of Stock</button>`
+    : `<div class="product-btns">
+        <button class="order-btn" data-i="${i}">Order Now</button>
+        <button class="cart-add-btn" data-i="${i}" title="Add to cart">🛍</button>
+      </div>`;
 
   card.innerHTML = `
     <div class="product-imgbox">${imgHtml}</div>
@@ -276,92 +333,230 @@ products.forEach((p, i) => {
       <h3>${p.name}</h3>
       <p>${p.desc}</p>
       ${priceHtml(p)}
-      ${p.outOfStock ? `<button class="order-btn" style="background:#999;cursor:not-allowed;" disabled>Out of Stock</button>` : `<button class="order-btn" data-i="${i}">Order Now</button>`}
+      ${btns}
     </div>`;
   grid.appendChild(card);
 });
 
-// Order modal logic
-const overlay  = document.getElementById('orderOverlay');
-const modalName  = document.getElementById('modalProductName');
-const modalPrice = document.getElementById('modalProductPrice');
-let selectedMethod = 'COD';
-
+// ── Slider ──────────────────────────────────────────────────
 function handleSlideError(img) {
   const slider = img.closest('.photo-slider');
   const slides = [...slider.querySelectorAll('.photo-slide')];
   const dots = [...slider.querySelectorAll('.slider-dot')];
-  const removedIndex = slides.indexOf(img);
+  const ri = slides.indexOf(img);
   const wasActive = img.classList.contains('active');
-  img.remove();
-  if (dots[removedIndex]) dots[removedIndex].remove();
-
-  const remainingSlides = [...slider.querySelectorAll('.photo-slide')];
-  const remainingDots = [...slider.querySelectorAll('.slider-dot')];
-  if (!remainingSlides.length) {
-    slider.parentElement.textContent = img.alt.replace(/ photo \d+$/, '');
-    return;
-  }
-
-  remainingDots.forEach((dot, index) => dot.dataset.slide = index);
-  if (remainingSlides.length === 1) {
-    slider.querySelectorAll('.slider-btn,.slider-dots').forEach(control => control.style.display = 'none');
-  }
-  if (wasActive) {
-    remainingSlides[0].classList.add('active');
-    if (remainingDots[0]) remainingDots[0].classList.add('active');
-  }
+  img.remove(); if (dots[ri]) dots[ri].remove();
+  const rs = [...slider.querySelectorAll('.photo-slide')];
+  const rd = [...slider.querySelectorAll('.slider-dot')];
+  if (!rs.length) { slider.parentElement.textContent = img.alt.replace(/ photo \d+$/,''); return; }
+  rd.forEach((d,idx) => d.dataset.slide = idx);
+  if (rs.length===1) slider.querySelectorAll('.slider-btn,.slider-dots').forEach(c=>c.style.display='none');
+  if (wasActive) { rs[0].classList.add('active'); if(rd[0]) rd[0].classList.add('active'); }
 }
 
+// ── Size picker state ───────────────────────────────────────
+let pendingCartIndex = null;
+let selectedSize = null;
+
+function openSizePicker(i) {
+  pendingCartIndex = i;
+  selectedSize = null;
+  document.getElementById('sizeProductName').textContent = products[i].name;
+  document.querySelectorAll('.size-opt').forEach(b => b.classList.remove('selected'));
+  document.getElementById('sizeOverlay').classList.add('active');
+}
+
+// ── Cart functions ──────────────────────────────────────────
+function updateCartUI() {
+  const count = cart.reduce((s,c) => s + c.qty, 0);
+  const el = document.getElementById('cartCount');
+  el.textContent = count;
+  el.classList.toggle('visible', count > 0);
+
+  const itemsEl = document.getElementById('cartItems');
+  const footer = document.getElementById('cartFooter');
+  if (cart.length === 0) {
+    itemsEl.innerHTML = '<div class="cart-empty">Your cart is empty</div>';
+    footer.style.display = 'none';
+    return;
+  }
+  footer.style.display = 'block';
+  const total = cart.reduce((s,c) => s + c.unitPrice * c.qty, 0);
+  document.getElementById('cartTotal').textContent = formatPrice(total);
+  document.getElementById('checkoutTotal').textContent = `Total: ${formatPrice(total)}`;
+
+  itemsEl.innerHTML = cart.map((c, ci) => {
+    const p = products[c.productIndex];
+    const imgSrc = (p.images||[])[0] || (p.img||'');
+    return `<div class="cart-item">
+      ${imgSrc ? `<img class="cart-item-img" src="${imgSrc}" alt="${c.name}">` : `<div class="cart-item-img" style="background:#e9ddc9;"></div>`}
+      <div class="cart-item-info">
+        <h4>${c.name}</h4>
+        <div class="item-size">Size: ${c.size}</div>
+        <div class="item-price">${formatPrice(c.unitPrice)}</div>
+        <div class="cart-qty">
+          <button onclick="changeQty(${ci},-1)">−</button>
+          <span>${c.qty}</span>
+          <button onclick="changeQty(${ci},1)">+</button>
+        </div>
+      </div>
+      <button class="cart-item-remove" onclick="removeFromCart(${ci})">✕</button>
+    </div>`;
+  }).join('');
+}
+
+function addToCart(i, size) {
+  const p = products[i];
+  const unitPrice = salePrice(p);
+  const existing = cart.find(c => c.productIndex === i && c.size === size);
+  if (existing) { existing.qty++; }
+  else { cart.push({ productIndex: i, name: p.name.trim(), size, unitPrice, qty: 1 }); }
+  updateCartUI();
+  openCart();
+}
+
+function removeFromCart(ci) { cart.splice(ci, 1); updateCartUI(); }
+function changeQty(ci, delta) {
+  cart[ci].qty += delta;
+  if (cart[ci].qty <= 0) cart.splice(ci, 1);
+  updateCartUI();
+}
+
+function openCart() {
+  document.getElementById('cartPanel').classList.add('open');
+  document.getElementById('cartBackdrop').classList.add('open');
+}
+function closeCart() {
+  document.getElementById('cartPanel').classList.remove('open');
+  document.getElementById('cartBackdrop').classList.remove('open');
+}
+
+// ── Event listeners ─────────────────────────────────────────
+document.getElementById('cartBtn').addEventListener('click', openCart);
+document.getElementById('cartClose').addEventListener('click', closeCart);
+document.getElementById('cartBackdrop').addEventListener('click', closeCart);
+
+document.getElementById('sizeClose').addEventListener('click', () => {
+  document.getElementById('sizeOverlay').classList.remove('active');
+});
+document.getElementById('sizeConfirm').addEventListener('click', () => {
+  if (!selectedSize) { alert('Please select a size.'); return; }
+  document.getElementById('sizeOverlay').classList.remove('active');
+  addToCart(pendingCartIndex, selectedSize);
+});
+
+document.getElementById('checkoutBtn').addEventListener('click', () => {
+  closeCart();
+  document.getElementById('checkoutOverlay').classList.add('active');
+});
+document.getElementById('closeCheckout').addEventListener('click', () => {
+  document.getElementById('checkoutOverlay').classList.remove('active');
+});
+
+let selectedMethod = 'COD';
+let selectedMethod2 = 'COD';
+
 document.addEventListener('click', e => {
+  // Slider
   const sliderButton = e.target.closest('.slider-btn');
   const sliderDot = e.target.closest('.slider-dot');
   if (sliderButton || sliderDot) {
     const slider = e.target.closest('.photo-slider');
     const slides = slider.querySelectorAll('.photo-slide');
     const dots = slider.querySelectorAll('.slider-dot');
-    const current = [...slides].findIndex(slide => slide.classList.contains('active'));
+    const current = [...slides].findIndex(s => s.classList.contains('active'));
     const next = sliderDot
       ? Number(sliderDot.dataset.slide)
       : (current + Number(sliderButton.dataset.direction) + slides.length) % slides.length;
-
-    slides.forEach((slide, index) => slide.classList.toggle('active', index === next));
-    dots.forEach((dot, index) => dot.classList.toggle('active', index === next));
+    slides.forEach((s,idx) => s.classList.toggle('active', idx===next));
+    dots.forEach((d,idx) => d.classList.toggle('active', idx===next));
     return;
   }
 
-  if (e.target.classList.contains('order-btn')) {
+  // Order Now
+  if (e.target.classList.contains('order-btn') && e.target.dataset.i !== undefined) {
     const p = products[e.target.dataset.i];
-    modalName.textContent  = p.name;
-    modalPrice.innerHTML = priceHtml(p);
-    overlay.classList.add('active');
+    document.getElementById('modalProductName').textContent = p.name;
+    document.getElementById('modalProductPrice').innerHTML = priceHtml(p);
+    document.getElementById('orderOverlay').classList.add('active');
+    return;
   }
+
+  // Add to cart bag icon
+  if (e.target.classList.contains('cart-add-btn')) {
+    openSizePicker(Number(e.target.dataset.i));
+    return;
+  }
+
+  // Size options
+  if (e.target.classList.contains('size-opt')) {
+    document.querySelectorAll('.size-opt').forEach(b => b.classList.remove('selected'));
+    e.target.classList.add('selected');
+    selectedSize = e.target.dataset.size;
+    return;
+  }
+
+  // Pay method (order modal)
   if (e.target.classList.contains('pay-btn')) {
     document.querySelectorAll('.pay-btn').forEach(b => b.classList.remove('selected'));
     e.target.classList.add('selected');
     selectedMethod = e.target.dataset.method;
+    return;
+  }
+
+  // Pay method (checkout modal)
+  if (e.target.classList.contains('pay-btn2')) {
+    document.querySelectorAll('.pay-btn2').forEach(b => b.classList.remove('selected'));
+    e.target.classList.add('selected');
+    selectedMethod2 = e.target.dataset.method;
+    return;
   }
 });
 
-document.getElementById('closeModal').addEventListener('click', () => overlay.classList.remove('active'));
+document.getElementById('closeModal').addEventListener('click', () => {
+  document.getElementById('orderOverlay').classList.remove('active');
+});
 
+// Order Now form submit
 document.getElementById('orderForm').addEventListener('submit', async (e) => {
   e.preventDefault();
-  const form=e.target;
-  const product=modalName.textContent;
-  const name=form.querySelector('input[type="text"]').value;
-  const phone=form.querySelector('input[type="tel"]').value;
-  const address=form.querySelector('textarea').value;
-  const fd=new FormData();
-  fd.append('entry.2044316825',product);
-  fd.append('entry.1940213735',name);
-  fd.append('entry.473078617',phone);
-  fd.append('entry.890501403',address);
-  fd.append('entry.1197115355',selectedMethod==='Card'?'Online Payment':'Cash on Delivery');
-  await fetch('https://docs.google.com/forms/d/e/1FAIpQLSePjEXjFb8rKnNX5xS1H7ACbzM8Kx6mPx08ncnUXw95kaEYEQ/formResponse',{method:'POST',mode:'no-cors',body:fd});
-  if(selectedMethod==='Card'){alert('Order saved. Please complete your online payment as instructed.');}
-  else{alert('Thank you! Your order has been placed.');}
-  overlay.classList.remove('active');
+  const form = e.target;
+  const product = document.getElementById('modalProductName').textContent;
+  const name = form.querySelector('input[type="text"]').value;
+  const phone = form.querySelector('input[type="tel"]').value;
+  const address = form.querySelector('textarea').value;
+  const fd = new FormData();
+  fd.append('entry.2044316825', product);
+  fd.append('entry.1940213735', name);
+  fd.append('entry.473078617', phone);
+  fd.append('entry.890501403', address);
+  fd.append('entry.1197115355', selectedMethod==='Card' ? 'Online Payment' : 'Cash on Delivery');
+  await fetch('https://docs.google.com/forms/d/e/1FAIpQLSePjEXjFb8rKnNX5xS1H7ACbzM8Kx6mPx08ncnUXw95kaEYEQ/formResponse', {method:'POST',mode:'no-cors',body:fd});
+  alert(selectedMethod==='Card' ? 'Order saved. Please complete your online payment.' : 'Thank you! Your order has been placed.');
+  document.getElementById('orderOverlay').classList.remove('active');
+  form.reset();
+});
+
+// Checkout form (cart) submit
+document.getElementById('checkoutForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const form = e.target;
+  const name = form.querySelector('input[type="text"]').value;
+  const phone = form.querySelector('input[type="tel"]').value;
+  const address = form.querySelector('textarea').value;
+  const itemsSummary = cart.map(c => `${c.name.trim()} (${c.size}) x${c.qty}`).join(' | ');
+  const total = formatPrice(cart.reduce((s,c) => s+c.unitPrice*c.qty,0));
+  const fd = new FormData();
+  fd.append('entry.2044316825', itemsSummary);
+  fd.append('entry.1940213735', name);
+  fd.append('entry.473078617', phone);
+  fd.append('entry.890501403', address);
+  fd.append('entry.1197115355', (selectedMethod2==='Card'?'Online Payment':'Cash on Delivery') + ' | Total: ' + total);
+  await fetch('https://docs.google.com/forms/d/e/1FAIpQLSePjEXjFb8rKnNX5xS1H7ACbzM8Kx6mPx08ncnUXw95kaEYEQ/formResponse', {method:'POST',mode:'no-cors',body:fd});
+  alert('Thank you! Your order has been placed. We will contact you soon.');
+  document.getElementById('checkoutOverlay').classList.remove('active');
+  cart = [];
+  updateCartUI();
   form.reset();
 });
 </script>
