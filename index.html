@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sheesha Gucchi — Women's Traditional Wear</title>
+<meta name="description" content="Sheesha Gucchi — handcrafted kurtas and shalwar kameez for the modern woman. Shop now, cash on delivery or card.">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@300;400;500;600&display=swap');
+  :root{--maroon:#8C2F39;--gold:#B58B46;--cream:#FAF6F0;--ink:#2B221E;--line:#E4DCD0;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);font-weight:300;}
+  h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:600;letter-spacing:0.01em;}
+  a{text-decoration:none;color:inherit;}
+  .promo-bar{background:var(--maroon);color:var(--cream);text-align:center;font-size:0.78rem;letter-spacing:0.08em;padding:9px 10px;text-transform:uppercase;}
+  header{display:flex;justify-content:space-between;align-items:center;padding:22px 6%;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50;background:var(--cream);}
+  .logo{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:700;letter-spacing:0.04em;color:var(--maroon);}
+  nav{display:flex;align-items:center;gap:34px;}
+  nav a{font-size:0.85rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink);}
+  nav a:hover{color:var(--maroon);}
+
+  /* CART ICON */
+  .cart-btn{background:none;border:none;cursor:pointer;position:relative;display:flex;align-items:center;gap:6px;font-size:0.85rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink);font-family:'Jost',sans-serif;}
+  .cart-btn:hover{color:var(--maroon);}
+  .cart-count{background:var(--maroon);color:#fff;border-radius:50%;width:18px;height:18px;font-size:0.65rem;display:none;align-items:center;justify-content:center;font-weight:600;}
+  .cart-count.visible{display:flex;}
+
+  .hero{min-height:78vh;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(rgba(43,34,30,0.32),rgba(43,34,30,0.32)),linear-gradient(135deg,#d9c7b0,#b58b46 45%,#8c2f39 100%);color:#fff;padding:40px 6%;}
+  .hero-inner{max-width:640px;}
+  .eyebrow{letter-spacing:0.22em;text-transform:uppercase;font-size:0.78rem;margin-bottom:18px;display:block;}
+  .hero h1{font-size:clamp(2.6rem,7vw,4.6rem);line-height:1.08;font-weight:700;}
+  .hero p{margin-top:18px;font-size:1.05rem;font-weight:300;opacity:0.95;}
+  .hero .cta{margin-top:34px;display:inline-block;border:1px solid #fff;padding:14px 40px;font-size:0.85rem;letter-spacing:0.12em;text-transform:uppercase;transition:background 0.2s,color 0.2s;}
+  .hero .cta:hover{background:#fff;color:var(--maroon);}
+  section{padding:80px 6%;}
+  .section-head{text-align:center;margin-bottom:50px;}
+  .section-head .eyebrow{color:var(--gold);margin-bottom:10px;}
+  .section-head h2{font-size:clamp(2rem,4vw,2.8rem);}
+  .section-head p{margin-top:12px;color:#6b5e54;font-size:0.95rem;max-width:480px;margin-left:auto;margin-right:auto;}
+  .shop-grid{display:grid;grid-template-columns:repeat(3,minmax(0,320px));gap:28px;justify-content:center;max-width:1060px;margin:0 auto;}
+
+  /* CATEGORY NAV + SECTIONS */
+  .category-nav{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-bottom:56px;}
+  .category-nav a{border:1px solid var(--ink);padding:10px 26px;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;transition:background 0.2s,color 0.2s;}
+  .category-nav a:hover{background:var(--ink);color:#fff;}
+  .category-section{margin-bottom:70px;scroll-margin-top:100px;}
+  .category-section:last-child{margin-bottom:0;}
+  .category-title-wrap{text-align:center;margin-bottom:34px;}
+  .category-title{font-size:clamp(1.5rem,3vw,2.1rem);color:var(--maroon);}
+  .category-title-wrap .category-sub{margin-top:6px;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;color:#a8998a;}
+  .product{text-align:left;display:flex;flex-direction:column;}
+  .product-imgbox{width:100%;aspect-ratio:4/5;background:#ffffff;border:none;overflow:hidden;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Cormorant Garamond',serif;font-size:1rem;text-align:center;padding:0px;}
+  .product-imgbox img{width:100%;height:100%;object-fit:cover;display:block;}
+  .photo-slider{position:relative;width:100%;height:100%;}
+  .photo-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 0.25s ease;}
+  .photo-slide.active{opacity:1;}
+  .slider-btn{position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;border:1px solid rgba(255,255,255,0.78);background:rgba(43,34,30,0.45);color:#fff;cursor:pointer;font-size:1.25rem;line-height:1;display:flex;align-items:center;justify-content:center;z-index:2;}
+  .slider-btn:hover{background:rgba(140,47,57,0.86);}
+  .slider-btn.prev{left:10px;}
+  .slider-btn.next{right:10px;}
+  .slider-dots{position:absolute;left:0;right:0;bottom:10px;display:flex;justify-content:center;gap:7px;z-index:2;}
+  .slider-dot{width:8px;height:8px;border-radius:50%;border:1px solid #fff;background:rgba(255,255,255,0.35);cursor:pointer;padding:0;}
+  .slider-dot.active{background:#fff;}
+  .product-info{padding:18px 0 0;flex:1;display:flex;flex-direction:column;}
+  .product-info h3{font-size:1.2rem;font-weight:600;margin-bottom:6px;}
+  .product-info p{font-size:0.85rem;color:#6b5e54;line-height:1.55;flex:1;}
+  .price{font-family:'Jost',sans-serif;font-weight:500;color:var(--maroon);font-size:0.95rem;margin-top:10px;}
+
+  /* PRODUCT BUTTONS */
+  .product-btns{display:flex;gap:8px;margin-top:14px;}
+  .order-btn{flex:1;background:var(--ink);color:#fff;padding:13px;border:none;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:background 0.2s;}
+  .order-btn:hover{background:var(--maroon);}
+  .cart-add-btn{flex:1;width:100%;background:var(--ink);border:1px solid var(--ink);border-radius:4px;color:#fff;padding:11px;font-size:0.8rem;font-family:'Jost',sans-serif;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;transition:background 0.2s,transform 0.15s;display:flex;align-items:center;justify-content:center;gap:7px;}
+  .cart-add-btn span{font-size:1rem;line-height:1;}
+  .cart-add-btn:hover{background:var(--maroon);border-color:var(--maroon);}
+  .cart-add-btn:active{transform:scale(0.97);}
+
+  .about{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);text-align:center;}
+  .about .eyebrow{color:var(--gold);margin-bottom:14px;}
+  .about h2{font-size:clamp(1.9rem,4vw,2.6rem);margin-bottom:18px;}
+  .about p{max-width:560px;margin:0 auto;line-height:1.85;color:#5a4d44;font-size:1rem;}
+  .socials{display:flex;gap:16px;justify-content:center;margin-top:34px;flex-wrap:wrap;}
+  .socials a{border:1px solid var(--ink);padding:10px 26px;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;}
+  .socials a:hover{background:var(--ink);color:#fff;}
+  footer{text-align:center;padding:36px 6%;font-size:0.78rem;color:#8a7d72;letter-spacing:0.04em;}
+
+  /* ORDER MODAL */
+  .overlay{position:fixed;inset:0;background:rgba(43,34,30,0.55);display:none;align-items:center;justify-content:center;z-index:100;padding:20px;}
+  .overlay.active{display:flex;}
+  .modal{background:var(--cream);border:1px solid var(--line);max-width:420px;width:100%;padding:36px;max-height:90vh;overflow-y:auto;}
+  .modal h3{font-size:1.5rem;margin-bottom:4px;}
+  .modal .modal-price{color:var(--maroon);font-weight:500;margin-bottom:22px;font-size:0.95rem;}
+  .modal label{display:block;font-size:0.78rem;letter-spacing:0.06em;text-transform:uppercase;font-weight:500;margin:16px 0 6px;color:#6b5e54;}
+  .modal input,.modal textarea{width:100%;padding:11px;border:1px solid var(--line);background:#fff;font-family:inherit;font-size:0.9rem;color:var(--ink);}
+  .modal input:focus,.modal textarea:focus{outline:1px solid var(--maroon);}
+  .pay-options{display:flex;gap:10px;margin-top:16px;}
+  .pay-options button{flex:1;padding:12px;border:1px solid var(--ink);background:#fff;font-size:0.78rem;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;}
+  .pay-options button.selected{background:var(--ink);color:#fff;}
+  .cod-notice{margin-top:18px;padding:12px 14px;background:#f4ede2;border:1px solid var(--line);font-size:0.85rem;color:#5a4d44;letter-spacing:0.02em;}
+  .submit-order{margin-top:24px;width:100%;padding:15px;border:none;background:var(--maroon);color:#fff;font-size:0.85rem;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;}
+  .submit-order:hover{background:var(--ink);}
+  .close-btn{float:right;background:none;border:none;font-size:1.2rem;cursor:pointer;color:var(--ink);}
+
+  /* CART PANEL */
+  .cart-panel{position:fixed;top:0;right:-420px;width:100%;max-width:420px;height:100vh;background:var(--cream);border-left:1px solid var(--line);z-index:200;display:flex;flex-direction:column;transition:right 0.3s ease;box-shadow:-4px 0 20px rgba(0,0,0,0.08);}
+  .cart-panel.open{right:0;}
+  .cart-header{display:flex;justify-content:space-between;align-items:center;padding:24px 28px;border-bottom:1px solid var(--line);}
+  .cart-header h3{font-size:1.4rem;}
+  .cart-close{background:none;border:none;font-size:1.3rem;cursor:pointer;}
+  .cart-items{flex:1;overflow-y:auto;padding:20px 28px;}
+  .cart-empty{text-align:center;padding:60px 20px;color:#8a7d72;font-size:0.95rem;}
+  .cart-item{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line);}
+  .cart-item-img{width:70px;height:90px;object-fit:cover;flex-shrink:0;background:#f0ebe4;}
+  .cart-item-info{flex:1;}
+  .cart-item-info h4{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;margin-bottom:4px;line-height:1.3;}
+  .cart-item-info .item-price{color:var(--maroon);font-size:0.9rem;font-weight:500;}
+  .cart-item-remove{background:none;border:none;color:#8a7d72;cursor:pointer;font-size:1.1rem;align-self:flex-start;padding:2px;}
+  .cart-item-remove:hover{color:var(--maroon);}
+  .cart-qty{display:flex;align-items:center;gap:10px;margin-top:8px;}
+  .cart-qty button{background:none;border:1px solid var(--line);width:26px;height:26px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;}
+  .cart-qty span{font-size:0.9rem;min-width:20px;text-align:center;}
+  .cart-footer{padding:20px 28px;border-top:1px solid var(--line);}
+  .cart-total{display:flex;justify-content:space-between;margin-bottom:18px;font-size:1rem;}
+  .cart-total span:last-child{font-weight:600;color:var(--maroon);}
+  .checkout-btn{width:100%;padding:15px;border:none;background:var(--maroon);color:#fff;font-size:0.85rem;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;}
+  .checkout-btn:hover{background:var(--ink);}
+  .cart-backdrop{position:fixed;inset:0;background:rgba(43,34,30,0.4);z-index:199;display:none;}
+  .cart-backdrop.open{display:block;}
+
+  /* SIZE MODAL */
+
+
+  @media(max-width:900px){.shop-grid{grid-template-columns:repeat(2,minmax(0,320px));}}
+  @media(max-width:560px){.shop-grid{grid-template-columns:minmax(0,340px);}nav a:not(.cart-nav){display:none;}}
+</style>
+</head>
+<body>
+
+<div class="promo-bar">ENJOY UP TO 20% OFF ON OUR NEW COLLECTION</div>
+
+<header>
+  <div class="logo">Sheesha Gucchi</div>
+  <nav>
+    <a href="#shop">Shop</a>
+    <a href="#about">Our Story</a>
+    <a href="#contact">Contact</a>
+    <button class="cart-btn" id="cartBtn">
+      🛍 Cart
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow">New Season Collection</span>
+    <h1>Crafted in Heritage, Draped in Luxury</h1>
+    <p>Discover the timeless art of authentic handmade embroidery, delicate tarkashi, and brilliant mirror work on fine chiffon and georgette.</p>
+    <a href="#shop" class="cta">Shop the Collection</a>
+  </div>
+</section>
+
+<section id="shop">
+  <div class="section-head">
+    <span class="eyebrow" style="color:var(--gold);letter-spacing:0.22em;text-transform:uppercase;font-size:0.75rem;display:block;margin-bottom:10px;">The Collection</span>
+    <h2>Featured Pieces</h2>
+    <p>Discover our premium handmade collection, focusing on high-quality fabrics with detailed Tarkashi and mirror work.</p>
+  </div>
+  <div class="category-nav" id="categoryNav"></div>
+  <div id="shopSections"></div>
+</section>
+
+<section class="about" id="about">
+  <span class="eyebrow">Our Story</span>
+  <h2>Rooted in Tradition</h2>
+  <p>Sheesha Gucchi began with a simple belief — that traditional wear deserves the same care and craftsmanship as any couture house. Every kurta and shalwar kameez we create blends heritage embroidery with a modern silhouette, made for women who carry their roots with pride.</p>
+  <div class="socials" id="contact">
+    <a href="#" target="_blank">Instagram</a>
+    <a href="https://wa.me/923244872717" target="_blank">WhatsApp</a>
+    <a href="#" target="_blank">Facebook</a>
+  </div>
+</section>
+
+<footer>© 2026 Sheesha Gucchi. Handcrafted in Pakistan.</footer>
+
+<!-- Cart backdrop -->
+<div class="cart-backdrop" id="cartBackdrop"></div>
+
+<!-- Cart panel -->
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-header">
+    <h3>Your Cart</h3>
+    <button class="cart-close" id="cartClose">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty">Your cart is empty</div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none;">
+    <div class="cart-total">
+      <span>Total</span>
+      <span id="cartTotal">PKR 0</span>
+    </div>
+    <button class="checkout-btn" id="checkoutBtn">Place Order</button>
+  </div>
+</div>
+
+<!-- Checkout modal (cart orders) -->
+<div class="overlay" id="checkoutOverlay">
+  <div class="modal">
+    <button class="close-btn" id="closeCheckout">✕</button>
+    <h3>Checkout</h3>
+    <div class="modal-price" id="checkoutTotal" style="margin-bottom:22px;"></div>
+    <form id="checkoutForm">
+      <label>Full Name</label>
+      <input type="text" required placeholder="Your name">
+      <label>Phone Number</label>
+      <input type="tel" required placeholder="03XX-XXXXXXX">
+      <label>Email <span style="text-transform:none;font-weight:400;color:#a8998a;">(optional)</span></label>
+      <input type="email" placeholder="you@example.com">
+      <label>Delivery Address</label>
+      <textarea required rows="2" placeholder="House, street, city"></textarea>
+      <div class="cod-notice">Payment Method: Cash on Delivery</div>
+      <button type="submit" class="submit-order">Place Order</button>
+    </form>
+  </div>
+</div>
+
+<script>
+const products = [
+  { name: "Sage Green & Lavender Embroidered Tarkashi & Mirror work (unstitched) ", price: "PKR 8,000", discount: 20, desc: "Hand-embroidered | Bamber chiffon.", category: "Chiffon", images: ["images/photo6.png", "images/shirt1.jpeg", "images/duppata1.jpeg"] },
+  { name: "Ocean Blue 2-piece Tarkashi & Mirror work (unstitched)", price: "PKR 8,000", discount: 15, desc: "Hand-embroidered | Bamber chiffon", category: "Chiffon", images: ["images/photo4.png", "images/photo4-2.png", "images/photo4-3.png"] },
+  { name: "Ivory Grace 2-piece Tarkashi & Mirror work (unstitched)", price: "PKR 6,500", desc: "Hand-embroidered | Bamber chiffon", category: "Chiffon", images: ["images/photo3.jpg", "images/", "images/"], outOfStock: true },
+  { name: "Sky Blue 2-piece Tarkashi & Mirror work (unstitched)", price: "PKR 6,500", desc: "Hand-embroidered | Festive georgette", category: "Georgette", images: ["images/photo2.png", "images/photo2-2.png", "images/photo2-3.png"] },
+  { name: "Classic White 2-piece Tarkashi & Mirror work (unstitched)", price: "PKR 6,500", desc: "Hand-embroidered | Bamber chiffon", category: "Chiffon", images: ["images/photo14.png", "images/", "images/"] },
+  { name: "Pink & White 2-piece hand-embroidered (unstitched)", price: "PKR 8,000", discount: 20 ,desc: "Hand-embroidered | Festive georgette", category: "Georgette", images: ["images/photo9.png", "images/shirt,pink.jpeg", "images/duppata.pink.jpeg"] },
+  { name: "3-piece mirrror work (unstitched)", price: "PKR 4,500", desc: "Hand-embroidered | Lawn ", category: "Lawn", images:["images/photo16.png", "images/", "images/"] },
+  { name: "2-piece hand embroidered mirror worked (unstitched)", price: "PKR 6,500", desc: "Hand-embroidered | Festive georgette", category: "Georgette", images: ["images/pc18.jpg", "images/pc17.jpg", "images/"] },
+  { name: "3-piece lawn Mirror work (unstitched)", price: "PKR 4,500", desc: "Hand-embroidered | Lawn", category: "Lawn", images: ["images/photo15.png", "images/photo11.png", "images/close.shirt1.png"] },
+  { name: "2-piece Georgette miror work (unstitched)", price: "PKR 6,500", desc: "Hand-embroidered | Festive georgette", category: "Georgette", images: ["images/pc19.jpeg", "images/pc20.jpeg", "images/"] },
+  { name: "2-piece Georgette mirror work (unstitched)", price: "PKR 8,000", desc: " Hand embroidered | Festive georgette", category: "Georgette", images: ["images/pc21.jpeg", "images/", "images/"] }
+];
+
+// ── Cart state ──────────────────────────────────────────────
+let cart = [];
+
+function priceNumber(price) { return Number(String(price).replace(/[^\d]/g,'')); }
+function formatPrice(amount) { return `PKR ${Math.round(amount).toLocaleString('en-US')}`; }
+function salePrice(p) {
+  if (!p.discount) return priceNumber(p.price);
+  return Math.round(priceNumber(p.price) * (100 - Number(p.discount)) / 100);
+}
+function priceHtml(p) {
+  if (!p.discount) return `<div class="price">${p.price}</div>`;
+  return `<div class="price">
+    <span style="text-decoration:line-through;color:#8a7d72;margin-right:8px;">${p.price}</span>
+    <span style="font-weight:600;color:#8C2F39;">${formatPrice(salePrice(p))}</span>
+    <span style="background:#8C2F39;color:white;font-size:0.7rem;padding:4px 7px;margin-left:8px;">${p.discount}% OFF</span>
+  </div>`;
+}
+
+// ── Build a single product card (i = index into global products array) ──
+function buildCard(p, i) {
+  const card = document.createElement('div');
+  card.className = 'product';
+  const photos = p.images || (p.img ? [p.img] : []);
+  let imgHtml;
+  if (photos.length > 1) {
+    imgHtml = `<div class="photo-slider" data-product="${i}">
+      ${photos.map((ph, pi) => `<img class="photo-slide ${pi===0?'active':''}" src="${ph}" alt="${p.name} photo ${pi+1}" onerror="handleSlideError(this)">`).join('')}
+      <button class="slider-btn prev" type="button" data-direction="-1">&#8249;</button>
+      <button class="slider-btn next" type="button" data-direction="1">&#8250;</button>
+      <div class="slider-dots">${photos.map((_,pi)=>`<button class="slider-dot ${pi===0?'active':''}" type="button" data-slide="${pi}"></button>`).join('')}</div>
+    </div>`;
+  } else if (photos.length === 1) {
+    imgHtml = `<img src="${photos[0]}" alt="${p.name}" onerror="this.parentElement.innerHTML='${p.name.replace(/'/g,"\\'")}'">`; 
+  } else {
+    imgHtml = p.name;
+  }
+
+  const btns = p.outOfStock
+    ? `<button class="cart-add-btn" style="background:#999;border-color:#999;cursor:not-allowed;" disabled>Out of Stock</button>`
+    : `<div class="product-btns">
+        <button class="cart-add-btn" data-i="${i}" title="Add to cart">Add to Cart</button>
+      </div>`;
+
+  card.innerHTML = `
+    <div class="product-imgbox">${imgHtml}</div>
+    <div class="product-info">
+      <h3>${p.name}</h3>
+      <p>${p.desc}</p>
+      ${priceHtml(p)}
+      ${btns}
+    </div>`;
+  return card;
+}
+
+// ── Group products by category and build one section per fabric ──
+const categoryOrder = ["Chiffon", "Georgette", "Lawn"];
+const categoryTagline = {
+  Chiffon: "Light, flowing Bamber chiffon with fine Tarkashi & mirror work.",
+  Georgette: "Rich, flowy Festive georgette with hand embroidery.",
+  Lawn: "Everyday-ready lawn with delicate mirror work."
+};
+
+const byCategory = {};
+products.forEach((p, i) => {
+  const cat = p.category || "Other";
+  (byCategory[cat] = byCategory[cat] || []).push(i);
+});
+const orderedCats = categoryOrder
+  .filter(c => byCategory[c])
+  .concat(Object.keys(byCategory).filter(c => !categoryOrder.includes(c)));
+
+const navEl = document.getElementById('categoryNav');
+const sectionsEl = document.getElementById('shopSections');
+
+orderedCats.forEach(cat => {
+  const anchorId = 'cat-' + cat.toLowerCase().replace(/\s+/g, '-');
+
+  navEl.insertAdjacentHTML('beforeend', `<a href="#${anchorId}">${cat}</a>`);
+
+  const sec = document.createElement('div');
+  sec.className = 'category-section';
+  sec.id = anchorId;
+  sec.innerHTML = `
+    <div class="category-title-wrap">
+      <h3 class="category-title">${cat}</h3>
+      <div class="category-sub">${categoryTagline[cat] || ''}</div>
+    </div>
+    <div class="shop-grid"></div>`;
+  sectionsEl.appendChild(sec);
+
+  const grid = sec.querySelector('.shop-grid');
+  byCategory[cat].forEach(i => grid.appendChild(buildCard(products[i], i)));
+});
+
+// ── Slider ──────────────────────────────────────────────────
+function handleSlideError(img) {
+  const slider = img.closest('.photo-slider');
+  const slides = [...slider.querySelectorAll('.photo-slide')];
+  const dots = [...slider.querySelectorAll('.slider-dot')];
+  const ri = slides.indexOf(img);
+  const wasActive = img.classList.contains('active');
+  img.remove(); if (dots[ri]) dots[ri].remove();
+  const rs = [...slider.querySelectorAll('.photo-slide')];
+  const rd = [...slider.querySelectorAll('.slider-dot')];
+  if (!rs.length) { slider.parentElement.textContent = img.alt.replace(/ photo \d+$/,''); return; }
+  rd.forEach((d,idx) => d.dataset.slide = idx);
+  if (rs.length===1) slider.querySelectorAll('.slider-btn,.slider-dots').forEach(c=>c.style.display='none');
+  if (wasActive) { rs[0].classList.add('active'); if(rd[0]) rd[0].classList.add('active'); }
+}
+
+// ── Cart functions ──────────────────────────────────────────
+function updateCartUI() {
+  const count = cart.reduce((s,c) => s + c.qty, 0);
+  const el = document.getElementById('cartCount');
+  el.textContent = count;
+  el.classList.toggle('visible', count > 0);
+
+  const itemsEl = document.getElementById('cartItems');
+  const footer = document.getElementById('cartFooter');
+  if (cart.length === 0) {
+    itemsEl.innerHTML = '<div class="cart-empty">Your cart is empty</div>';
+    footer.style.display = 'none';
+    return;
+  }
+  footer.style.display = 'block';
+  const total = cart.reduce((s,c) => s + c.unitPrice * c.qty, 0);
+  document.getElementById('cartTotal').textContent = formatPrice(total);
+  document.getElementById('checkoutTotal').textContent = `Total: ${formatPrice(total)}`;
+
+  itemsEl.innerHTML = cart.map((c, ci) => {
+    const p = products[c.productIndex];
+    const imgSrc = (p.images||[])[0] || (p.img||'');
+    return `<div class="cart-item">
+      ${imgSrc ? `<img class="cart-item-img" src="${imgSrc}" alt="${c.name}">` : `<div class="cart-item-img" style="background:#e9ddc9;"></div>`}
+      <div class="cart-item-info">
+        <h4>${c.name}</h4>
+        <div class="item-price">${formatPrice(c.unitPrice)}</div>
+        <div class="cart-qty">
+          <button onclick="changeQty(${ci},-1)">−</button>
+          <span>${c.qty}</span>
+          <button onclick="changeQty(${ci},1)">+</button>
+        </div>
+      </div>
+      <button class="cart-item-remove" onclick="removeFromCart(${ci})">✕</button>
+    </div>`;
+  }).join('');
+}
+
+function addToCart(i) {
+  const p = products[i];
+  const unitPrice = salePrice(p);
+  const existing = cart.find(c => c.productIndex === i);
+  if (existing) { existing.qty++; }
+  else { cart.push({ productIndex: i, name: p.name.trim(), unitPrice, qty: 1 }); }
+  updateCartUI();
+}
+
+function removeFromCart(ci) { cart.splice(ci, 1); updateCartUI(); }
+function changeQty(ci, delta) {
+  cart[ci].qty += delta;
+  if (cart[ci].qty <= 0) cart.splice(ci, 1);
+  updateCartUI();
+}
+
+function openCart() {
+  document.getElementById('cartPanel').classList.add('open');
+  document.getElementById('cartBackdrop').classList.add('open');
+}
+function closeCart() {
+  document.getElementById('cartPanel').classList.remove('open');
+  document.getElementById('cartBackdrop').classList.remove('open');
+}
+
+// ── Event listeners ─────────────────────────────────────────
+document.getElementById('cartBtn').addEventListener('click', openCart);
+document.getElementById('cartClose').addEventListener('click', closeCart);
+document.getElementById('cartBackdrop').addEventListener('click', closeCart);
+
+document.getElementById('checkoutBtn').addEventListener('click', () => {
+  closeCart();
+  document.getElementById('checkoutOverlay').classList.add('active');
+});
+document.getElementById('closeCheckout').addEventListener('click', () => {
+  document.getElementById('checkoutOverlay').classList.remove('active');
+});
+
+let selectedMethod = 'COD';
+let selectedMethod2 = 'COD';
+
+document.addEventListener('click', e => {
+  // Slider
+  const sliderButton = e.target.closest('.slider-btn');
+  const sliderDot = e.target.closest('.slider-dot');
+  if (sliderButton || sliderDot) {
+    const slider = e.target.closest('.photo-slider');
+    const slides = slider.querySelectorAll('.photo-slide');
+    const dots = slider.querySelectorAll('.slider-dot');
+    const current = [...slides].findIndex(s => s.classList.contains('active'));
+    const next = sliderDot
+      ? Number(sliderDot.dataset.slide)
+      : (current + Number(sliderButton.dataset.direction) + slides.length) % slides.length;
+    slides.forEach((s,idx) => s.classList.toggle('active', idx===next));
+    dots.forEach((d,idx) => d.classList.toggle('active', idx===next));
+    return;
+  }
+
+  // Add to cart bag icon
+  if (e.target.classList.contains('cart-add-btn') || e.target.closest('.cart-add-btn')) {
+    const btn = e.target.closest('.cart-add-btn');
+    if (btn.disabled) return;
+    addToCart(Number(btn.dataset.i));
+    const original = btn.innerHTML;
+    btn.innerHTML = '<span>✓</span> Added';
+    btn.disabled = true;
+    setTimeout(() => { btn.innerHTML = original; btn.disabled = false; }, 900);
+    return;
+  }
+
+  // Pay method (checkout modal)
+  if (e.target.classList.contains('pay-btn2')) {
+    document.querySelectorAll('.pay-btn2').forEach(b => b.classList.remove('selected'));
+    e.target.classList.add('selected');
+    selectedMethod2 = e.target.dataset.method;
+    return;
+  }
+});
+
+// Checkout form (cart) submit
+document.getElementById('checkoutForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const form = e.target;
+  const name = form.querySelector('input[type="text"]').value;
+  const phone = form.querySelector('input[type="tel"]').value;
+  const email = form.querySelector('input[type="email"]').value;
+  const address = form.querySelector('textarea').value;
+  const itemsSummary = cart.map(c => `${c.name.trim()} x${c.qty}`).join(' | ');
+  const total = formatPrice(cart.reduce((s,c) => s+c.unitPrice*c.qty,0));
+  const fd = new FormData();
+  fd.append('entry.1195881377', itemsSummary);
+  fd.append('entry.1744213306', name);
+  fd.append('entry.1904664450', phone);
+  fd.append('entry.1079290946', address);
+  fd.append('entry.1394769822', total);
+  fd.append('entry.532650267', email);
+  await fetch('https://docs.google.com/forms/d/e/1FAIpQLSdUrwbEErhC85cbVI8g2WDmOMwwcJ_pux4dmn3jvHY48ujuMg/formResponse', {method:'POST',mode:'no-cors',body:fd});
+  alert('Thank you! Your order has been placed. We will contact you soon.');
+  document.getElementById('checkoutOverlay').classList.remove('active');
+  cart = [];
+  updateCartUI();
+  form.reset();
+});
+</script>
+</body>
+</html>
