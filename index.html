@@ -38,6 +38,16 @@
   .section-head h2{font-size:clamp(2rem,4vw,2.8rem);}
   .section-head p{margin-top:12px;color:#6b5e54;font-size:0.95rem;max-width:480px;margin-left:auto;margin-right:auto;}
   .shop-grid{display:grid;grid-template-columns:repeat(3,minmax(0,320px));gap:28px;justify-content:center;max-width:1060px;margin:0 auto;}
+
+  /* CATEGORY NAV + SECTIONS */
+  .category-nav{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-bottom:56px;}
+  .category-nav a{border:1px solid var(--ink);padding:10px 26px;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;transition:background 0.2s,color 0.2s;}
+  .category-nav a:hover{background:var(--ink);color:#fff;}
+  .category-section{margin-bottom:70px;scroll-margin-top:100px;}
+  .category-section:last-child{margin-bottom:0;}
+  .category-title-wrap{text-align:center;margin-bottom:34px;}
+  .category-title{font-size:clamp(1.5rem,3vw,2.1rem);color:var(--maroon);}
+  .category-title-wrap .category-sub{margin-top:6px;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;color:#a8998a;}
   .product{text-align:left;display:flex;flex-direction:column;}
   .product-imgbox{width:100%;aspect-ratio:4/5;background:#ffffff;border:none;overflow:hidden;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Cormorant Garamond',serif;font-size:1rem;text-align:center;padding:0px;}
   .product-imgbox img{width:100%;height:100%;object-fit:cover;display:block;}
@@ -126,7 +136,7 @@
 </head>
 <body>
 
-<div class="promo-bar">Cash on Delivery Available Across Pakistan</div>
+<div class="promo-bar">ENJOY UP TO 20% OFF ON OUR NEW COLLECTION</div>
 
 <header>
   <div class="logo">Sheesha Gucchi</div>
@@ -156,7 +166,8 @@
     <h2>Featured Pieces</h2>
     <p>Discover our premium handmade collection, focusing on high-quality fabrics with detailed Tarkashi and mirror work.</p>
   </div>
-  <div class="shop-grid" id="shopGrid"></div>
+  <div class="category-nav" id="categoryNav"></div>
+  <div id="shopSections"></div>
 </section>
 
 <section class="about" id="about">
@@ -216,17 +227,17 @@
 
 <script>
 const products = [
-  { name: "Sage Green & Lavender Embroidered Tarkashi & Mirror work (unstitched) ", price: "PKR 7,000", desc: "Hand-embroidered | Bamber chiffon.", images: ["images/photo6.png", "images/shirt1.jpeg", "images/duppata1.jpeg"] },
-  { name: "Ocean Blue 2-piece Tarkashi & Mirror work (unstitched)", price: "PKR 8,000", discount: 15, desc: "Hand-embroidered | Bamber chiffon", images: ["images/photo4.png", "images/photo4-2.png", "images/photo4-3.png"] },
-  { name: "Ivory Grace 2-piece Tarkashi & Mirror work (unstitched)", price: "PKR 6,500", desc: "Handmade | Bamber chiffon", images: ["images/photo3.jpeg", "images/photo5.png", "images/photo3-3.jpeg"], outOfStock: true },
-  { name: "Sky Blue 2-piece Tarkashi & Mirror work (unstitched)", price: "PKR 6,500", desc: "Hand-made | Festive georgette", images: ["images/photo2.png", "images/photo2-2.png", "images/photo2-3.png"] },
-  { name: "Classic White 2-piece Tarkashi & Mirror work (unstitched)", price: "PKR 7,000", desc: "Hand-embroidered | Bamber chiffon", images: ["images/photo7.png"] },
-  { name: "Black & Crimson 2-piece hand-embroidered (unstitched)", price: "PKR 7,500", desc: "Hand-embroidered | Festive georgette", images: ["images/photo8.png"] },
-  { name: "Bridal Maroon Lehenga", price: "PKR 18,000", desc: "Heavily embellished bridal lehenga with dupatta.", images: ["images/photo9.png"] },
-  { name: "Pastel Lawn Suit", price: "PKR 3,500", desc: "Three-piece lawn suit in soft pastel tones.", images: ["images/photo10.png"] },
-  { name: "Black Velvet Kurta", price: "PKR 4,200", desc: "Winter velvet kurta with gold thread detailing.", images: ["images/photo11.png"] },
-  { name: "Rose Embroidered Shalwar Kameez", price: "PKR 5,500", desc: "Rose-pink three-piece with mirror work.", images: ["images/photo12.png"] },
-  { name: "Classic White Kurta", price: "PKR 2,200", desc: "Timeless white cotton kurta, minimal embroidery.", images: ["images/photo13.png"] }
+  { name: "Sage Green & Lavender Embroidered Tarkashi & Mirror work (unstitched) ", price: "PKR 8,000", discount: 20, desc: "Hand-embroidered | Bamber chiffon.", category: "Chiffon", images: ["images/photo6.png", "images/shirt1.jpeg", "images/duppata1.jpeg"] },
+  { name: "Ocean Blue 2-piece Tarkashi & Mirror work (unstitched)", price: "PKR 8,000", discount: 15, desc: "Hand-embroidered | Bamber chiffon", category: "Chiffon", images: ["images/photo4.png", "images/photo4-2.png", "images/photo4-3.png"] },
+  { name: "Ivory Grace 2-piece Tarkashi & Mirror work (unstitched)", price: "PKR 6,500", desc: "Hand-embroidered | Bamber chiffon", category: "Chiffon", images: ["images/photo3.jpg", "images/", "images/"], outOfStock: true },
+  { name: "Sky Blue 2-piece Tarkashi & Mirror work (unstitched)", price: "PKR 6,500", desc: "Hand-embroidered | Festive georgette", category: "Georgette", images: ["images/photo2.png", "images/photo2-2.png", "images/photo2-3.png"] },
+  { name: "Classic White 2-piece Tarkashi & Mirror work (unstitched)", price: "PKR 6,500", desc: "Hand-embroidered | Bamber chiffon", category: "Chiffon", images: ["images/photo14.png", "images/", "images/"] },
+  { name: "Pink & White 2-piece hand-embroidered (unstitched)", price: "PKR 8,000", discount: 20 ,desc: "Hand-embroidered | Festive georgette", category: "Georgette", images: ["images/photo9.png", "images/shirt,pink.jpeg", "images/duppata.pink.jpeg"] },
+  { name: "3-piece mirrror work (unstitched)", price: "PKR 4,500", desc: "Hand-embroidered | Lawn ", category: "Lawn", images:["images/photo16.png", "images/", "images/"] },
+  { name: "2-piece hand embroidered mirror worked (unstitched)", price: "PKR 6,500", desc: "Hand-embroidered | Festive georgette", category: "Georgette", images: ["images/pc18.jpg", "images/pc17.jpg", "images/"] },
+  { name: "3-piece lawn Mirror work (unstitched)", price: "PKR 4,500", desc: "Hand-embroidered | Lawn", category: "Lawn", images: ["images/photo15.png", "images/photo11.png", "images/close.shirt1.png"] },
+  { name: "2-piece Georgette miror work (unstitched)", price: "PKR 6,500", desc: "Hand-embroidered | Festive georgette", category: "Georgette", images: ["images/pc19.jpeg", "images/pc20.jpeg", "images/"] },
+  { name: "2-piece Georgette mirror work (unstitched)", price: "PKR 8,000", desc: " Hand embroidered | Festive georgette", category: "Georgette", images: ["images/pc21.jpeg", "images/", "images/"] }
 ];
 
 // ── Cart state ──────────────────────────────────────────────
@@ -247,9 +258,8 @@ function priceHtml(p) {
   </div>`;
 }
 
-// ── Build product grid ──────────────────────────────────────
-const grid = document.getElementById('shopGrid');
-products.forEach((p, i) => {
+// ── Build a single product card (i = index into global products array) ──
+function buildCard(p, i) {
   const card = document.createElement('div');
   card.className = 'product';
   const photos = p.images || (p.img ? [p.img] : []);
@@ -270,7 +280,7 @@ products.forEach((p, i) => {
   const btns = p.outOfStock
     ? `<button class="cart-add-btn" style="background:#999;border-color:#999;cursor:not-allowed;" disabled>Out of Stock</button>`
     : `<div class="product-btns">
-        <button class="cart-add-btn" data-i="${i}" title="Add to cart"><span>🛍</span> Add to Cart</button>
+        <button class="cart-add-btn" data-i="${i}" title="Add to cart">Add to Cart</button>
       </div>`;
 
   card.innerHTML = `
@@ -281,7 +291,47 @@ products.forEach((p, i) => {
       ${priceHtml(p)}
       ${btns}
     </div>`;
-  grid.appendChild(card);
+  return card;
+}
+
+// ── Group products by category and build one section per fabric ──
+const categoryOrder = ["Chiffon", "Georgette", "Lawn"];
+const categoryTagline = {
+  Chiffon: "Light, flowing Bamber chiffon with fine Tarkashi & mirror work.",
+  Georgette: "Rich, flowy Festive georgette with hand embroidery.",
+  Lawn: "Everyday-ready lawn with delicate mirror work."
+};
+
+const byCategory = {};
+products.forEach((p, i) => {
+  const cat = p.category || "Other";
+  (byCategory[cat] = byCategory[cat] || []).push(i);
+});
+const orderedCats = categoryOrder
+  .filter(c => byCategory[c])
+  .concat(Object.keys(byCategory).filter(c => !categoryOrder.includes(c)));
+
+const navEl = document.getElementById('categoryNav');
+const sectionsEl = document.getElementById('shopSections');
+
+orderedCats.forEach(cat => {
+  const anchorId = 'cat-' + cat.toLowerCase().replace(/\s+/g, '-');
+
+  navEl.insertAdjacentHTML('beforeend', `<a href="#${anchorId}">${cat}</a>`);
+
+  const sec = document.createElement('div');
+  sec.className = 'category-section';
+  sec.id = anchorId;
+  sec.innerHTML = `
+    <div class="category-title-wrap">
+      <h3 class="category-title">${cat}</h3>
+      <div class="category-sub">${categoryTagline[cat] || ''}</div>
+    </div>
+    <div class="shop-grid"></div>`;
+  sectionsEl.appendChild(sec);
+
+  const grid = sec.querySelector('.shop-grid');
+  byCategory[cat].forEach(i => grid.appendChild(buildCard(products[i], i)));
 });
 
 // ── Slider ──────────────────────────────────────────────────
